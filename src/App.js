@@ -16,7 +16,9 @@ function App() {
     <Router>
       <MainNavigation />
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/" exact >
+          
+        </Route>
         <Route path="/auth" element={<h1>Authentication</h1>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
