@@ -1,0 +1,6 @@
+
+.header-image { 
+    height: 35px;
+    vertical-align: middle;
+    margin: 8px;/* Ensures the image covers the area without distortion */ /* Optional: makes the image circular */
+}
