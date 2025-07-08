@@ -6,10 +6,11 @@ import {
 } from 'react-router-dom';
 import React from 'react';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
+import HomePage from './user/Pages/HomePage';
+import Auth from './user/Pages/Auth'
 
 
 import './App.css';
-import HomePage from './homePage/Pages/HomePage';
 
 
 function App() {
@@ -17,11 +18,13 @@ function App() {
     <React.Fragment>
     <Router>
       <MainNavigation />
-      <Routes>
-        <Route path="/" element={<HomePage isAuth='false'/>}/> 
-        <Route path="/auth" element={<h1>Authentication</h1>} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage/>}/> 
+          <Route path="/auth" element={<Auth/>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
     </Router>
     </React.Fragment>
   )

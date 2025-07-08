@@ -3,6 +3,7 @@ import MainHeader from './MainHeader';
 import './MainNavigation.css';
 import { Link } from 'react-router-dom';
 import NavLinks from './NavLinks';
+import HeaderImage from '../UIElements/HeaderImage'
 
 const MainNavigation = () => {
     return <MainHeader>
@@ -16,13 +17,7 @@ const MainNavigation = () => {
         <h1 className="main-navigation__title">
           <Link to="/">
           Expense Tracker
-          <img src="/expenseIcon.png"
-          alt="Logo" 
-          style={{ 
-            height: '50px', 
-            verticalAlign: 'middle', 
-            margin: '8px'
-        }}/>
+          <HeaderImage imageUrl="/expenseIcon.png" altText="Logo"/>
           </Link>
         </h1>
         <nav className="main-navigation__header-nav">
