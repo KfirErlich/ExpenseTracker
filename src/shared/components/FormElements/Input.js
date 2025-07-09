@@ -1,5 +1,6 @@
 // We use the useReducer hook when we want to handle more than one state that connected to each other (or have more complex states)
-// For example here , we have the validation state and the input state  
+// For example here , we have the validation state and the input state
+// We use useEffect whenever we want to render something once, but have a dependency that will render this logic again whenever the dependency changes (for example: use input can change the validation)  
 
 import React, {useReducer, useEffect} from 'react'
 import { validate } from '../../utils/validators';
@@ -26,17 +27,17 @@ const inputReducer = (state, action) => {
 
 const Input = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
-        value: '',
+        value: props.value || '',
         isTouched: false,
-        isValid: false
+        isValid: props.initialValid || false
     });
 
     const {id, onInput} = props
     const {value, isValid} = inputState
 
-    // useEffect(() => {
-    //     onInput(props.id,inputState.value, inputState.isValid)
-    // }, [id, onInput, value, isValid])
+    useEffect(() => {
+        onInput(id, value, isValid)
+    }, [id, value, isValid, onInput])
 
 
     const changeHandler = event => {
