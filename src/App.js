@@ -8,6 +8,7 @@ import React, {useState, useCallback} from 'react';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import HomePage from './user/Pages/HomePage';
 import Auth from './user/Pages/Auth'
+import AllExpenses from './user/Pages/AllExpenses'
 import { AuthContext } from './shared/context/auth-context'
 
 
@@ -33,7 +34,7 @@ function App() {
     <React.Fragment>
     <Route path="/" element={<HomePage/>}/>
     <Route path='/new/expense' element={<h1>NEW EXPENSE!</h1>}/>
-    <Route path='/all/expenses' element={<h1>ALL EXPENSES!</h1>}/>
+    <Route path='/all/expenses' element={<AllExpenses/>}/>;
     <Route path="*" element={<Navigate to="/" replace />}/>;
     </React.Fragment>
     )
