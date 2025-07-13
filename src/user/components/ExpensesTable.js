@@ -1,58 +1,42 @@
-import { useState } from "react"
-import { useReactTable, getCoreRowModel } from '@tanstack/react-table';
-import { Box } from "@chakra-ui/react";
-import { tableData } from '../utils/tableData'
+import { useState } from 'react'
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './ExpensesTable.css'
 
-const columns = [
-    {
-        accessorKey: "name",
-        header: "שם",
-        cell: ({getValue}) => <p>{getValue()}</p>
-    },
-    {
-        accessorKey: "amount",
-        header: "כמות",
-        cell: ({getValue}) => <p>{getValue().toFixed(2)}</p>
-    },
-    {
-        accessorKey: "catagory",
-        header: "קטגוריה",
-        cell: ({getValue}) => <p>{getValue()}</p>
-    },
-    {
-        accessorKey: "account",
-        header: "חשבון",
-        cell: ({getValue}) => <p>{getValue()}</p>
-    }
-]
-
+// Register all Community features
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 const ExpensesTable = () => {
-    const [data, setData] = useState(tableData)
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel : getCoreRowModel()
-    })
+    const [rowData, setRowData] = useState([
+        { "שם ההוצאה": "שכר דירה", "סכום": 7700, "קטגוריה": "שכר דירה", "חשבון": "משותף" },
+        { "שם ההוצאה": "אמפם", "סכום": 40, "קטגוריה": "סופר", "חשבון": "משותף" },
+        { "שם ההוצאה": "דלק", "סכום": 200, "קטגוריה": "רכב", "חשבון": "שהם" },
+    ]);
 
+    const [colDefs, setColDefs] = useState([
+        { field: "שם ההוצאה" },
+        { field: "סכום" },
+        { field: "קטגוריה" },
+        { field: "חשבון" }
+    ]);
 
-    console.log(table.getHeaderGroups())
+    const defaultColDef = {
+    flex: 3,
+  };
 
-    return(
-    <Box>
-        <Box>
-        {table.getHeaderGroups().map((headerGroup) => <Box key={headerGroup.id}>
-            {headerGroup.headers.map(
-                header => <Box key={header.id}>
-                    {header.column.columnDef.header}
-                </Box>
-            )}
-        </Box>) 
-        }
-        </Box>
-    </Box>
-)
+    return (
+      <div className="expenses-table-container">
+        <div className="ag-theme-alpine custom-ag-grid">
+          <AgGridReact
+            rowData={rowData}
+            columnDefs={colDefs}
+            defaultColDef={defaultColDef}
+          />
+        </div>
+      </div>
+    )
 }
 
 export default ExpensesTable
